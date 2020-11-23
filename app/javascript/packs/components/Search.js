@@ -23,7 +23,7 @@ class Search extends React.Component {
         console.log('Starting fetchSearchResult..');
         const pageNumber = updatedPageNo ? `&page=${updatedPageNo}` : '';
         // By default the limit of results is 20
-        const searchUrl = `http://localhost:3000/search/index?search_index%5Bquery%5D=${query}`;
+        const searchUrl = `/search/index?search_index%5Bquery%5D=${query}`;
         console.log(`Starting fetchSearchResult with url: ${searchUrl}`);
         if (this.cancel) {
             // Cancel the previous request before making a new request

@@ -249,7 +249,7 @@ class SellDeviceForm extends React.Component {
             )
             .join("&");
 
-        let url = "http://localhost:3000/products/estimate_price?" + query;
+        let url = "/products/estimate_price?" + query;
         console.log("that the sheiet", url);
 
         fetch(url)

@@ -32,7 +32,7 @@ class RepairDeviceForm extends React.Component {
     componentDidMount() {
         // Get repair devices from api
         this.getRepairablesFromApi(
-            "http://localhost:3000/repairables.json"
+            "/repairables.json"
         ).then((products) => {
             console.log("Result: ", products);
             this.setState({ results: products });
@@ -50,7 +50,7 @@ class RepairDeviceForm extends React.Component {
         this.setState({ query: selectedOption.value }, () => {
             console.log("query:", this.state.query);
             this.getRepairablesFromApi(
-                "http://localhost:3000/repairables.json",
+                "/repairables.json",
                 this.state.query
             ).then((products) => {
                 console.log("Result: ", products);
