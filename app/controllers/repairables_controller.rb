@@ -1,27 +1,28 @@
+# frozen_string_literal: true
+
 class RepairablesController < ApplicationController
-  before_action :set_repairable, only: [:show, :edit, :update, :destroy]
+  before_action :set_repairable, only: %i[show edit update destroy]
 
   # GET /repairables
   # GET /repairables.json
   def index
     # binding.pry
-    if not params[:search].present?
-      @repairables = Product.where(:is_repairable => true)
-    else
-      @repairables = Product.where(:is_repairable => true).search(params[:search])
-    end
+    @repairables = if !params[:search].present?
+                     Product.where(is_repairable: true)
+                   else
+                     Product.where(is_repairable: true).search(params[:search])
+                   end
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render :json => @repairables.to_json(:include => :repairables), status: :ok}
+      format.json { render json: @repairables.to_json(include: :repairables), status: :ok }
     end
     # render :json => @repairables, status: :ok
   end
 
   # GET /repairables/1
   # GET /repairables/1.json
-  def show
-  end
+  def show; end
 
   # GET /repairables/new
   def new
@@ -29,8 +30,7 @@ class RepairablesController < ApplicationController
   end
 
   # GET /repairables/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /repairables
   # POST /repairables.json
@@ -73,13 +73,14 @@ class RepairablesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_repairable
-      @repairable = Repairable.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def repairable_params
-      params.fetch(:repairable, {})
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_repairable
+    @repairable = Repairable.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def repairable_params
+    params.fetch(:repairable, {})
+  end
 end

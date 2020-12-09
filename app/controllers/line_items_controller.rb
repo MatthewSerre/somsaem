@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class LineItemsController < ApplicationController
   before_action :set_line_item, only: [:destroy]
-  before_action :set_cart, only: [:create, :destroy]
+  before_action :set_cart, only: %i[create destroy]
 
   def create
     @product = Product.find(params[:product_id])
@@ -22,5 +24,4 @@ class LineItemsController < ApplicationController
   def set_line_item
     @line_item = LineItem.find(params[:id])
   end
-
 end

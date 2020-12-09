@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'boot'
 
 require 'rails/all'
@@ -20,10 +22,8 @@ module Somsaem
     config.middleware.insert_before 0, Rack::Cors do
       allow do
         origins '*'
-        resource '*', :headers => :any, :methods => [:get, :post, :patch, :options]
+        resource '*', headers: :any, methods: %i[get post patch options]
       end
     end
-
   end
-
 end

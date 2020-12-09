@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class CartsController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_cart
-  before_action :set_cart, only: [:show, :destroy]
+  before_action :set_cart, only: %i[show destroy]
 
   def show
     if @cart.id == session[:cart_id]
@@ -25,12 +27,13 @@ class CartsController < ApplicationController
   end
 
   private
-    def cart_params
-      params.fetch(:cart, {})
-    end
 
-    def invalid_cart
-      logger.error "Attempt to access invalid cart #{params[:id]}"
-      redirect_to root_path, notice: "That cart doesn't exist"
-    end
+  def cart_params
+    params.fetch(:cart, {})
+  end
+
+  def invalid_cart
+    logger.error "Attempt to access invalid cart #{params[:id]}"
+    redirect_to root_path, notice: "That cart doesn't exist"
+  end
 end
